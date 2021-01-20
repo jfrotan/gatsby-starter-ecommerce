@@ -22,14 +22,15 @@ const Register = ({location}) => {
       email: values.email,
       password: values.password,
     })
-      .then(data => {
+      .then((data) => {
+        console.log('data: ' + data)
         const {id, token} = data
         localStorage.setItem('customerToken', token)
         localStorage.setItem('mcustomer', id)
         updateToken()
         navigate('/myaccount/')
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e)
         setLoading(false)
         setApiError(e.errors || e)
@@ -41,13 +42,13 @@ const Register = ({location}) => {
     validate,
   )
 
-  const handleErrors = errors => {
+  const handleErrors = (errors) => {
     if (!Array.isArray(errors) && !errors.length > 0) {
       return (
         <Message error header="Sorry" content="Cannot register at this time." />
       )
     }
-    return errors.map(e => (
+    return errors.map((e) => (
       <Message error header={e.title} content={e.detail} key={e.status} />
     ))
   }
@@ -107,7 +108,7 @@ const Register = ({location}) => {
 
 export default Register
 
-const validate = values => {
+const validate = (values) => {
   const errors = {}
   if (!values.email) {
     errors.email = 'Email address is required'
